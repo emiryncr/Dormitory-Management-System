@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="../style/auth.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,12 +12,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 
-<body class="h-screen bg-[url('img/grayBuildings.jpg')] backdrop-blur">
+<body class="h-screen bg-[url('../img/grayBuildings.jpg')] backdrop-blur">
     <div class="w-full max-w-4xl mx-auto flex items-center justify-center h-full sm:flex-row flex-col">
     <h1 class="lobster-regular">Hello, Welcome again!</h1>
     <form action="signin.php" method="post" class="bg-transparent shadow-lg rounded-[50px] px-10 bg-white/20 w-10/12 sm:w-11/12">
             <div class="form-header">
-                <img class="sm:max-w-64 max-w-40 mx-auto" src="img/logo.png" alt="">
+                <img class="sm:max-w-64 max-w-40 mx-auto" src="../img/logo.png" alt="">
                 <h1 class="text-xl mb-3 text-center">Login to continue!</h1>
             </div>
             <div class="max-w-sm mx-auto">
