@@ -3,7 +3,7 @@
         <div class="md:flex md:justify-between">
           <div class="mb-6 md:mb-0">
               <a href="#" class="flex items-center">
-                  <img src="../img/lightLogo.png" class="w-[70px] me-3"/>
+                <img src="../../img/lightLogo.png" class="w-[70px] me-3"/>
                   <span class="self-center text-2xl font-semibold whitespace-nowrap text-white mr-20">DELUXE DORM</span>
               </a>
           </div>
@@ -20,7 +20,7 @@
                       <li class="mb-4">
                         <a href="mailto:emiryncr@gmail.com" class="hover:underline">
                             <i class="fa-solid fa-envelope"></i>
-                            emiryncr@gmail.com
+                            emiryncr
                         </a>
                       </li>
                       <li>

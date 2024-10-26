@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin</title>
-    <link rel="icon" type="image/x-icon" href="../img/lightLogo.png">
+    <title>Student</title>
+    <link rel="icon" type="image/x-icon" href="../../img/lightLogo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=logout" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,23 +26,25 @@
     }
 </style>
 <body class="bg-neutral-900">
+    
     <?php
         $links = [
-            'Dorms' => '',
-            'Managers' => '',
-            'Students' => ''
+            'Home' => '',
+            'Booking' => '',
+            'Account' => ''
         ];
-        include './components/navbar.php';
+        include '../components/navbar.php';
     ?>
+
+
     <main class="h-[55rem]">
         <!-- Content goes here after starting MySql Course ... -->
     </main>
 
-    <?php include 'components/footer.php'; ?>
+    <?php include '../components/footer.php'; ?>
 
 
     <script>
-        // Navbar toggle
         document.querySelector('[data-collapse-toggle]').addEventListener('click', function() {
             var target = document.getElementById(this.getAttribute('aria-controls'));
             if (target.classList.contains('hidden')) {
