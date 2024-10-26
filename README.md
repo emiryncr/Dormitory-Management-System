@@ -15,7 +15,9 @@ First steps of full-stack web development. Project includes HTML-CSS-JS, PHP, My
 
 - Week 2 : Create Student, Manager and admin pages
 
-- Week 3 : 
+- Week 3 : Create sub links for admin.php
+
+- Week 4 : Create sub links for manager.php
 
   
 ## How to run
