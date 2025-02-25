@@ -58,7 +58,7 @@
 
  <div id="addModal" class="hidden fixed z-10 inset-0 overflow-y-auto backdrop-blur-md">
     <div class="flex items-center justify-center min-h-screen">
-        <div class="bg-neutral-300 rounded-lg sm:p-6 p-4 shadow-lg sm:min-w-96 max-w-64 mt-20 sm:mt-0">
+        <div class="bg-neutral-300 rounded-lg sm:p-6 p-4 shadow-lg sm:min-w-96 max-w-64 mt-32 sm:mt-0">
             <div class="flex justify-between items-center border-b pb-2">
                 <h2 class="sm:text-xl text-md font-semibold">Add Manager Pop-Up</h2>
                 <button id="closeModalBtn" class="text-red-700 hover:text-red-500 text-2xl font-bold">&times;</button>

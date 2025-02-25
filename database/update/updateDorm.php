@@ -27,8 +27,8 @@
 
         $up_photo = $_FILES["dormPhoto"]["name"];
 
-        if ($_FILES["dormPhoto"]["error"] == 0){
-            $image_path = "../../img/dorms/". basename($_FILES["dormPhoto"]["name"]);
+        if ($_FILES["dormPhoto"]["error"] == 0) {
+            $image_path = "../../img/dorms/" . basename($_FILES["dormPhoto"]["name"]);
             move_uploaded_file($_FILES["dormPhoto"]["tmp_name"], $image_path);
         }
 
