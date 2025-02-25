@@ -4,7 +4,7 @@
                 <img src="../../img/lightLogo.png" class="h-20" alt="DELUXE DORMS">
             </a>
             <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                <button type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-2 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center hover:scale-105 duration-200 montserrat">Logout</button>
+                <button type="button" name="logout" onclick="window.location.href='../../database/logout.php'" class="text-white bg-red-700 hover:bg-red-800 focus:ring-2 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center hover:scale-105 duration-200 montserrat">Logout</button>
                 <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 hover:bg-gray-700 focus:ring-gray-600 border border-neutral-500" aria-controls="navbar-sticky" aria-expanded="false">
                     <span class="material-symbols-outlined">
                         menu

@@ -1,3 +1,24 @@
+<?php
+    include '../../database/database_connection.php';
+    include '../../database/session_check.php';
+
+    if ($_SESSION['role'] !== 'Admin') {
+        header("Location: ../../authPages/login.php");
+        exit();
+   }
+
+   $username = $_SESSION['username'];
+
+    $sql = "
+        SELECT users.*
+        FROM users 
+        WHERE users.username = '$username'
+    ";
+    
+    $result = mysqli_query($connection, $sql);  
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,6 +84,21 @@
                         break;
                     default:
                         echo '<h1 class="text-white text-4xl text-center">Welcome to the admin dashboard!</h1>';
+
+                        if ($result && mysqli_num_rows($result) > 0) {
+                            $row = mysqli_fetch_assoc($result);
+                            echo <<<HTML
+                                <div class="min-h-[500px] flex items-center justify-center">
+                                    <div class="bg-gray-800 rounded-lg shadow-lg p-6 max-w-sm text-left">
+                                        <p class="text-white text-xl font-semibold mb-2">Hello, {$row['username']}!</p>
+                                    </div>
+                                </div>
+                            HTML;
+                        } else {
+                            echo '<script>window.location.href="../../authPages/login.php";</script>';
+                        }
+
+                        break;
                 }
             ?>
         </main>
@@ -72,6 +108,7 @@
 
 
     <script>
+        //tips: aria-controls is in nav.php to toggle the dropdown menu
         document.querySelector('[data-collapse-toggle]').addEventListener('click', function() {
             var target = document.getElementById(this.getAttribute('aria-controls'));
             if (target.classList.contains('hidden')) {

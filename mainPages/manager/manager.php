@@ -1,3 +1,26 @@
+<?php
+    include '../../database/database_connection.php';
+    include '../../database/session_check.php';
+
+    if ($_SESSION['role'] !== 'Manager') {
+        header("Location: ../../authPages/login.php");
+        exit();
+   }
+
+    $username = $_SESSION['username'];
+
+    $sql = "
+        SELECT users.*, dormitory.*
+        FROM users 
+        LEFT JOIN dormitory
+        ON users.dormid = dormitory.dormid
+        WHERE users.username = '$username'
+    ";
+    
+    $result = mysqli_query($connection, $sql);  
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,8 +65,7 @@
             $links = [
                 'Dashboard' => 'manager.php',
                 'Rooms' => 'manager.php?page=manage-rooms',
-                'Financials' => 'manager.php?page=manage-financials',
-                'Add Room' => ''
+                'Financials' => 'manager.php?page=manage-financials'
             ];
             include '../components/navbar.php';
         ?>
@@ -58,12 +80,30 @@
                         case 'manage-financials':
                             include './subpages/manage-financials.php';
                             break;
-                        case 'manage-add-rooms':
-                            include '';
-                            break;
                         default:
                             echo '<h1 class="text-white text-4xl text-center">Welcome to the manager dashboard!</h1>';
-                    }
+                            if ($result && mysqli_num_rows($result) > 0) {
+                                $row = mysqli_fetch_assoc($result);
+                                //tips <<<HTML is very usefull for multiline html code
+                                echo <<<HTML
+                                    <div class="min-h-[500px] flex items-center justify-center">
+                                        <div class="bg-gray-800 rounded-lg shadow-lg p-6 max-w-sm text-left">
+                                            <p class="text-white text-xl font-semibold mb-2">Hello, {$row['username']}!</p>
+                                            <p class="text-gray-300 text-lg">Your name is: <span class="font-bold text-white">{$row['name']}</span></p>
+                                            <p class="text-gray-300 text-lg">Your surname is: <span class="font-bold text-white">{$row['surname']}</span></p>
+                                            <p class="text-gray-300 text-lg">Your manager ID is: <span class="font-bold text-white">{$row['userid']}</span></p>
+                                            <p class="text-gray-300 text-lg">Your email is: <span class="font-bold text-white">{$row['email']}</span></p>
+                                            <p class="text-gray-300 text-lg">Your phone is: <span class="font-bold text-white">{$row['phone']}</span></p>
+                                            <p class="text-gray-300 text-lg">Managing dorm ID is: <span class="font-bold text-white">{$row['dormid'] }</span></p>
+                                            <p class="text-gray-300 text-lg">Managing dorm name is: <span class="font-bold text-white">{$row['dormname']}</span></p>
+                                        </div>
+                                    </div>
+                                HTML;
+                            } else {
+                                echo '<script>window.location.href="../../authPages/login.php";</script>';
+                            }
+                            break;
+                        }
                 ?>
         </main>
     </div>
@@ -71,6 +111,7 @@
 
 
     <script>
+        //tips: aria-controls is in nav.php to toggle the dropdown menu
         document.querySelector('[data-collapse-toggle]').addEventListener('click', function() {
             var target = document.getElementById(this.getAttribute('aria-controls'));
             if (target.classList.contains('hidden')) {
@@ -88,5 +129,8 @@
             document.getElementById('addModal').classList.add('hidden');
         });
     </script>
+    
+    <script src="../scripts/capacity.js"></script>
+
 </body>
 </html>

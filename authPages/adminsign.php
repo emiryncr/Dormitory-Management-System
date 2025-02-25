@@ -1,5 +1,26 @@
 <?php
     include "../database/database_connection.php";
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $password= password_hash($password, PASSWORD_DEFAULT);
+        
+        $sql = "SELECT * FROM users WHERE username = '$username'";
+        $result = mysqli_query($connection, $sql);
+
+        if (mysqli_num_rows($result) > 0) {
+            echo "<script>alert('Username already exists!')</script>";
+        } else {
+            $sql = "INSERT INTO users (username, password, role) VALUES ('$username', '$password', 'Admin')";
+            if (mysqli_query($connection, $sql)) {
+                echo "<script>alert('Sign-up successful!')</script>";
+                header("Location: login.php");
+            } else {
+                echo "<script>alert('Sign-up failed!')</script>";
+            }
+        }
+    }
 ?>
 
 
@@ -8,7 +29,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign-Up</title>
+    <title>Sign-Up Admin</title>
     <link rel="icon" type="image/x-icon" href="../img/lightLogo.png">
     <link rel="stylesheet" href="../style/auth.css">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -20,19 +41,15 @@
 
 <body class="h-screen bg-[url('../img/grayBuildings.jpg')] backdrop-blur">
     <div class="w-full max-w-4xl mx-auto flex items-center justify-center h-full sm:flex-row flex-col">
-    <h1 class="lobster-regular">Welcome to your dream dorm!</h1>
-    <form action="../database/add/addStudent.php" method="post" class="bg-transparent shadow-lg rounded-[50px] px-10 bg-white/20 w-10/12 sm:w-full">
+    <h1 class="lobster-regular">To be part of us as an Admin!</h1>
+    <form action="adminsign.php" method="post" class="bg-transparent shadow-lg rounded-[50px] px-10 bg-white/20 w-10/12 sm:w-full">
             <div class="form-header">
                 <img class="sm:max-w-64 max-w-40 mx-auto" src="../img/logo.png" alt="">
                 <h1 class="text-xl mb-3 text-center">Sign-up to start journey!</h1>
             </div>
             <div class="max-w-sm mx-auto">
                 <input class="shadow appearance-none border-b-2 border-r-2 rounded-full w-full py-3 px-4 text-zinc-950 mb-3 leading-tight focus:outline-none focus:shadow-outline bg-white/30 placeholder:text-zinc-700 text-lg" name="username" type="text" placeholder="Username" minlength="3" maxlength="50" required>
-                <input class="shadow appearance-none border-b-2 border-r-2 rounded-full w-full py-3 px-4 text-zinc-950 mb-3 leading-tight focus:outline-none focus:shadow-outline bg-white/30 placeholder:text-zinc-700 text-lg" name="name" type="text" placeholder="Name" minlength="2" maxlength="50" required>
-                <input class="shadow appearance-none border-b-2 border-r-2 rounded-full w-full py-3 px-4 text-zinc-950 mb-3 leading-tight focus:outline-none focus:shadow-outline bg-white/30 placeholder:text-zinc-700 text-lg" name="surname" type="text" placeholder="Surname" minlength="2" maxlength="50" required>
-                <input class="shadow appearance-none border-b-2 border-r-2 rounded-full w-full py-3 px-4 text-zinc-950 mb-3 leading-tight focus:outline-none focus:shadow-outline bg-white/30 placeholder:text-zinc-700 text-lg" name="email" type="email" placeholder="Email" required>
-                <input class="shadow appearance-none border-b-2 border-r-2 rounded-full w-full py-3 px-4 text-zinc-950 mb-3 leading-tight focus:outline-none focus:shadow-outline bg-white/30 placeholder:text-zinc-700 text-lg" name="phone" type="phone" placeholder="Phone" maxlength="12" required>
-                <input class="shadow appearance-none border-b-2 border-r-2 rounded-full w-full py-3 px-4 text-zinc-950 mb-3 leading-tight focus:outline-none focus:shadow-outline bg-white/30 placeholder:text-zinc-700 text-lg" name="password" type="password" placeholder="Password" minlength="8" required>
+                <input class="shadow appearance-none border-b-2 border-r-2 rounded-full w-full py-3 px-4 text-zinc-950 mb-3 leading-tight focus:outline-none focus:shadow-outline bg-white/30 placeholder:text-zinc-700 text-lg" name="password" type="password" placeholder="Password" minlength="5" required>
                 <input class="shadow appearance-none border-b-2 border-r-2 rounded-full w-full py-3 px-4 text-zinc-950 mb-3 leading-tight focus:outline-none focus:shadow-outline bg-white/30 placeholder:text-zinc-700 text-lg" name="confirm" type="password" placeholder="Confirm Password" required>
             </div>
             
@@ -45,7 +62,6 @@
                         </span>
                     </button>
                 </div>
-                <p class="mb-4 font-semibold">Already have an account? <a href="login.php" class="font-bold text-amber-500 hover:underline text-lg">Login</a></p>
             </div>
         </form>
     </div>
@@ -54,7 +70,6 @@
         const password = document.querySelector('input[name="password"]');
         const confirm = document.querySelector('input[name="confirm"]');
         const submit = document.querySelector('button[type="submit"]');
-        const form = document.querySelector('form');
 
         confirm.addEventListener('input', () => {
             if (password.value !== confirm.value) {
@@ -64,13 +79,13 @@
             }
         });
 
-        //tips: prevents to send datas to server if passwords do not match
-        form.addEventListener('submit', (e) => {
+        submit.addEventListener('click', () => {
             if (password.value !== confirm.value) {
-                e.preventDefault();
+                confirm.setCustomValidity('Passwords do not match');
+            } else {
+                confirm.setCustomValidity('');
             }
         });
-
     </script>
 
 </body>

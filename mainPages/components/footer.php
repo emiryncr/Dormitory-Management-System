@@ -12,9 +12,9 @@
                   <h2 class="mb-6 text-sm font-semibold text-white uppercase">Contact Us</h2>
                   <ul class="text-gray-400 font-medium">
                       <li class="mb-4">
-                        <a href="tel:+900000000" class="hover:underline">
+                        <a href="tel:+912345678" class="hover:underline">
                             <i class="fa-solid fa-phone"></i>
-                            +90 000 0000
+                            +91 234 5678
                         </a>
                       </li>
                       <li class="mb-4">
@@ -41,7 +41,7 @@
                           </a>
                       </li>
                       <li class="mb-4">
-                          <a href="" class="hover:underline">
+                          <a href="www.instagram.com/emiryncr" class="hover:underline">
                             <i class="fa-brands fa-instagram"></i>
                             Instagram
                           </a>
